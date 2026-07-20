@@ -1,5 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { Users2, Zap, Globe2 } from "lucide-react";
+import { motion } from "motion/react";
+
+import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const STATS = [
   {
@@ -24,16 +29,21 @@ const STATS = [
 
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <section id="about" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6">
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
-          <Image
-            src="/logofavicon.png"
-            alt=""
-            width={48}
-            height={48}
-            className="mb-4 h-12 w-12"
-          />
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: -6 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            className="mb-4 inline-block"
+          >
+            <Image src="/logofavicon.png" alt="" width={48} height={48} className="h-12 w-12" />
+          </motion.div>
           <span className="text-sm font-semibold uppercase tracking-wide text-brand-orange">
             Business Ideas &middot; Innovate &middot; Grow
           </span>
@@ -52,14 +62,24 @@ export function About() {
             mentoring the next generation of founders, StartPitch gives you one
             workspace to do it in.
           </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+          className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1"
+        >
           {STATS.map((stat) => (
-            <div
+            <motion.div
               key={stat.label}
-              className="flex items-center gap-4 rounded-xl border bg-card p-5"
+              variants={fadeUp}
+              whileHover={{ x: 4 }}
+              className="group flex items-center gap-4 rounded-xl border bg-card p-5 transition-colors duration-300 hover:border-brand-green/40"
             >
-              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.color}`}>
+              <div
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110 ${stat.color}`}
+              >
                 <stat.icon className="h-5 w-5" />
               </div>
               <div>
@@ -68,9 +88,9 @@ export function About() {
                 </div>
                 <div className="font-medium">{stat.value}</div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
