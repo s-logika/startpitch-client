@@ -1,3 +1,4 @@
+import { ScrollProgress } from "@/components/marketing/scroll-progress";
 import { Navbar } from "@/components/marketing/navbar";
 import { Hero } from "@/components/marketing/hero";
 import { Features } from "@/components/marketing/features";
@@ -9,6 +10,7 @@ import { Footer } from "@/components/marketing/footer";
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main className="flex-1">
         <Hero />
