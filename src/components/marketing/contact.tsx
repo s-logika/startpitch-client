@@ -38,11 +38,11 @@ export function Contact() {
           </p>
           <div className="mt-8 space-y-4">
             <div className="flex items-center gap-3 text-sm">
-              <Mail className="h-4 w-4 text-primary" />
+              <Mail className="h-4 w-4 text-brand-blue" />
               hello@startpitch.dev
             </div>
             <div className="flex items-center gap-3 text-sm">
-              <MapPin className="h-4 w-4 text-primary" />
+              <MapPin className="h-4 w-4 text-brand-green" />
               Remote-first, worldwide
             </div>
           </div>
