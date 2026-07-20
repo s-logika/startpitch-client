@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FileSearch,
   HeartHandshake,
@@ -6,6 +8,7 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
+import { motion } from "motion/react";
 
 import {
   Card,
@@ -13,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const FEATURES = [
   {
@@ -68,8 +72,14 @@ const ICON_STYLES: Record<(typeof FEATURES)[number]["color"], string> = {
 
 export function Features() {
   return (
-    <section id="features" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-      <div className="mx-auto max-w-2xl text-center">
+    <section id="features" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        variants={fadeUp}
+        className="mx-auto max-w-2xl text-center"
+      >
         <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
           Everything you need to raise, mentor, or invest.
         </h2>
@@ -77,22 +87,30 @@ export function Features() {
           One workspace for the entire fundraising lifecycle — from first draft to
           signed term sheet.
         </p>
-      </div>
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        variants={staggerContainer(0.08)}
+        className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {FEATURES.map((feature) => (
-          <Card key={feature.title} className="border-muted-foreground/10 transition-shadow hover:shadow-md">
-            <CardHeader>
-              <div
-                className={`mb-2 flex h-10 w-10 items-center justify-center rounded-lg ${ICON_STYLES[feature.color]}`}
-              >
-                <feature.icon className="h-5 w-5" />
-              </div>
-              <CardTitle className="text-base">{feature.title}</CardTitle>
-              <CardDescription>{feature.description}</CardDescription>
-            </CardHeader>
-          </Card>
+          <motion.div key={feature.title} variants={fadeUp} whileHover={{ y: -6 }}>
+            <Card className="group h-full border-muted-foreground/10 transition-all duration-300 hover:border-brand-green/40 hover:shadow-lg hover:shadow-brand-green/10">
+              <CardHeader>
+                <div
+                  className={`mb-2 flex h-10 w-10 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110 ${ICON_STYLES[feature.color]}`}
+                >
+                  <feature.icon className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-base">{feature.title}</CardTitle>
+                <CardDescription>{feature.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
