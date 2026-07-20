@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Award,
@@ -11,7 +12,6 @@ import {
   LayoutDashboard,
   LogOut,
   Mail,
-  Rocket,
   Shield,
   Target,
   Users,
@@ -62,10 +62,17 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
               <Link href="/dashboard">
-                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Rocket className="h-4 w-4" />
+                <Image
+                  src="/logofavicon.png"
+                  alt="StartPitch"
+                  width={28}
+                  height={28}
+                  className="h-7 w-7 shrink-0"
+                />
+                <span className="text-base font-semibold">
+                  <span className="text-brand-blue">Start</span>
+                  <span className="text-brand-green">Pitch</span>
                 </span>
-                <span className="text-base font-semibold">StartPitch</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
