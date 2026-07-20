@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { Menu, Rocket } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,10 +31,18 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="#home" className="flex items-center gap-2 font-semibold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Rocket className="h-4 w-4" />
+          <Image
+            src="/logofavicon.png"
+            alt="StartPitch"
+            width={36}
+            height={36}
+            className="h-9 w-9"
+            priority
+          />
+          <span className="text-lg tracking-tight">
+            <span className="text-brand-blue">Start</span>
+            <span className="text-brand-green">Pitch</span>
           </span>
-          <span className="text-lg tracking-tight">StartPitch</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
@@ -74,7 +83,11 @@ export function Navbar() {
           <SheetContent side="right" className="w-72">
             <SheetHeader>
               <SheetTitle className="flex items-center gap-2">
-                <Rocket className="h-4 w-4" /> StartPitch
+                <Image src="/logofavicon.png" alt="StartPitch" width={24} height={24} className="h-6 w-6" />
+                <span>
+                  <span className="text-brand-blue">Start</span>
+                  <span className="text-brand-green">Pitch</span>
+                </span>
               </SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-1 px-4">
