@@ -3,11 +3,13 @@
 import { useState, type FormEvent } from "react";
 import { Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { fadeUp, viewportOnce } from "@/lib/motion";
 
 export function Contact() {
   const [submitting, setSubmitting] = useState(false);
@@ -26,9 +28,14 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t bg-muted/30">
+    <section id="contact" className="scroll-mt-20 border-t bg-muted/30">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 lg:grid-cols-2">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Get in touch
           </h2>
@@ -37,18 +44,25 @@ export function Contact() {
             you.
           </p>
           <div className="mt-8 space-y-4">
-            <div className="flex items-center gap-3 text-sm">
+            <div className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1">
               <Mail className="h-4 w-4 text-brand-blue" />
               hello@startpitch.dev
             </div>
-            <div className="flex items-center gap-3 text-sm">
+            <div className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1">
               <MapPin className="h-4 w-4 text-brand-green" />
               Remote-first, worldwide
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border bg-card p-6">
+        <motion.form
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          onSubmit={handleSubmit}
+          className="space-y-4 rounded-xl border bg-card p-6 transition-colors duration-300 hover:border-brand-green/30"
+        >
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="contact-name">Name</Label>
@@ -78,7 +92,7 @@ export function Contact() {
           <Button type="submit" className="w-full" disabled={submitting}>
             {submitting ? "Sending..." : "Send message"}
           </Button>
-        </form>
+        </motion.form>
       </div>
     </section>
   );
