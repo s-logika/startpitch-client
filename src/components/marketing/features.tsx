@@ -20,38 +20,51 @@ const FEATURES = [
     title: "Pitch versioning & scoring",
     description:
       "Submit your pitch, iterate with new versions, and track your score history over time.",
+    color: "blue",
   },
   {
     icon: Sparkles,
     title: "AI-assisted evaluation",
     description:
       "Get structured feedback across market, team, traction, financials, defensibility, and clarity.",
+    color: "green",
   },
   {
     icon: Target,
     title: "Investor matching",
     description:
       "Set your thesis or startup profile and get scored matches based on sector, stage, geography, and check size.",
+    color: "sky",
   },
   {
     icon: HeartHandshake,
     title: "Mentor bookings",
     description:
       "Browse mentors, book sessions, and leave feedback after every call.",
+    color: "orange",
   },
   {
     icon: ShieldCheck,
     title: "Secure deal rooms",
     description:
       "Share documents behind an NDA gate, with a full access log for every download.",
+    color: "blue",
   },
   {
     icon: MessagesSquare,
     title: "Messaging & notifications",
     description:
       "Keep every conversation with investors and mentors in one place, with reputation and badges built in.",
+    color: "green",
   },
-];
+] as const;
+
+const ICON_STYLES: Record<(typeof FEATURES)[number]["color"], string> = {
+  blue: "bg-brand-blue/10 text-brand-blue",
+  green: "bg-brand-green/10 text-brand-green",
+  sky: "bg-brand-sky/10 text-brand-sky",
+  orange: "bg-brand-orange/10 text-brand-orange",
+};
 
 export function Features() {
   return (
@@ -67,9 +80,11 @@ export function Features() {
       </div>
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {FEATURES.map((feature) => (
-          <Card key={feature.title} className="border-muted-foreground/10">
+          <Card key={feature.title} className="border-muted-foreground/10 transition-shadow hover:shadow-md">
             <CardHeader>
-              <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <div
+                className={`mb-2 flex h-10 w-10 items-center justify-center rounded-lg ${ICON_STYLES[feature.color]}`}
+              >
                 <feature.icon className="h-5 w-5" />
               </div>
               <CardTitle className="text-base">{feature.title}</CardTitle>
