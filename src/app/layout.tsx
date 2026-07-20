@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { MotionConfig } from "motion/react";
 import "./globals.css";
 
 import { AuthProvider } from "@/lib/auth/auth-provider";
@@ -52,14 +53,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <QueryProvider>
-          <AuthProvider>
-            <TooltipProvider delayDuration={200}>
-              {children}
-              <Toaster richColors position="top-right" />
-            </TooltipProvider>
-          </AuthProvider>
-        </QueryProvider>
+        <MotionConfig reducedMotion="user">
+          <QueryProvider>
+            <AuthProvider>
+              <TooltipProvider delayDuration={200}>
+                {children}
+                <Toaster richColors position="top-right" />
+              </TooltipProvider>
+            </AuthProvider>
+          </QueryProvider>
+        </MotionConfig>
       </body>
     </html>
   );
