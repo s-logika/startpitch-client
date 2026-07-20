@@ -21,6 +21,23 @@ export const metadata: Metadata = {
   title: "StartPitch — Where founders meet capital",
   description:
     "StartPitch connects startup founders with investors and mentors: AI-assisted pitch evaluation, investor matching, mentor bookings, and secure deal rooms.",
+  openGraph: {
+    title: "StartPitch — Where founders meet capital",
+    description:
+      "AI-Powered Startup Pitch Evaluator & Investment Marketplace. Evaluate. Connect. Invest. Mentor. Secure.",
+    siteName: "StartPitch",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "StartPitch — Where founders meet capital",
+    description:
+      "AI-Powered Startup Pitch Evaluator & Investment Marketplace. Evaluate. Connect. Invest. Mentor. Secure.",
+  },
+};
+
+export const viewport = {
+  themeColor: "#1e2a8a",
 };
 
 export default function RootLayout({
