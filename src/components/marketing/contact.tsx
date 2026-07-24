@@ -44,10 +44,13 @@ export function Contact() {
             you.
           </p>
           <div className="mt-8 space-y-4">
-            <div className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1">
+            <a
+              href="mailto:hello@startpitch.dev"
+              className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1"
+            >
               <Mail className="h-4 w-4 text-brand-blue" />
               hello@startpitch.dev
-            </div>
+            </a>
             <div className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1">
               <MapPin className="h-4 w-4 text-brand-green" />
               Remote-first, worldwide
