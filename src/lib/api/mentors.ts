@@ -12,3 +12,13 @@ export function listMentors(params?: { expertise?: string; availability?: string
 export function getMentor(mentorId: number) {
   return apiRequest<Mentor>(`/api/v1/mentors/${mentorId}`);
 }
+
+export interface MentorPayload {
+  name: string;
+  expertise: string[];
+  availability: string;
+}
+
+export function createMentor(payload: MentorPayload) {
+  return apiRequest<Mentor>("/api/v1/mentors", { method: "POST", body: payload });
+}
