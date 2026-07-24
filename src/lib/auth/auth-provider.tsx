@@ -47,6 +47,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // getMe() resolves, never synchronously during this effect.
       // eslint-disable-next-line react-hooks/set-state-in-effect
       bootstrap();
+    } else {
+      // No access token: clear any leftover sp_session cookie. Without this,
+      // a stale cookie (e.g. localStorage cleared without going through
+      // logout()) makes proxy.ts treat us as authenticated and bounce
+      // /login back to /dashboard, which redirects to /login again — an
+      // infinite loop that gets stuck showing the dashboard's loading state.
+      clearTokens();
     }
     return () => setAuthExpiredHandler(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
