@@ -17,12 +17,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/lib/auth/auth-provider";
 
-function initialsFor(email: string): string {
-  return email.slice(0, 2).toUpperCase();
+function initialsFor(source: string): string {
+  const parts = source.trim().split(/\s+/);
+  if (parts.length > 1) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return source.slice(0, 2).toUpperCase();
 }
 
 export function DashboardHeader() {
   const { user, logout } = useAuth();
+  const name = user?.profile?.name as string | undefined;
+  const displayName = name || user?.email;
 
   return (
     <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
@@ -30,7 +36,7 @@ export function DashboardHeader() {
         <SidebarTrigger className="-ml-1" />
         <Separator orientation="vertical" className="mr-2 h-4" />
         <span className="text-sm font-medium text-muted-foreground">
-          {user ? `Welcome back, ${user.email}` : "Loading..."}
+          {user ? `Welcome back, ${displayName}` : "Loading..."}
         </span>
       </div>
 
@@ -47,13 +53,22 @@ export function DashboardHeader() {
               >
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="text-xs">
-                    {initialsFor(user.email)}
+                    {initialsFor(displayName ?? "")}
                   </AvatarFallback>
                 </Avatar>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel className="truncate">{user.email}</DropdownMenuLabel>
+              <DropdownMenuLabel className="truncate">
+                {name ? (
+                  <>
+                    <div className="font-medium">{name}</div>
+                    <div className="text-xs font-normal text-muted-foreground">{user.email}</div>
+                  </>
+                ) : (
+                  user.email
+                )}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href="/dashboard/profile">
